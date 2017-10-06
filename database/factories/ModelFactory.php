@@ -1,10 +1,12 @@
 <?php
 
-use App\User;
+use App\Buyer;
 use App\Category;
 use App\Product;
-use App\Transaction;
 use App\Seller;
+use App\Transaction;
+use App\User;
+use Faker\Generator as Faker;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,7 @@ use App\Seller;
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Faker $faker) {
     static $password;
 
     return [
@@ -28,11 +30,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
         'verified' => $verified = $faker->randomElement([User::VERIFIED_USER, User::UNVERIFIED_USER]),
         'verification_token' => $verified == User::VERIFIED_USER ? null : User::generateVerificationCode(),
-        'verified' => $verified = $faker->randomElement([User::ADMIN_USER, User::REGULAR_USER]),
+        'admin' => $verified = $faker->randomElement([User::ADMIN_USER, User::REGULAR_USER]),
     ];
 });
 
-$factory->define(App\Category::class, function (Faker\Generator $faker) {
+$factory->define(Category::class, function (Faker $faker) {
 
     return [
         'name' => $faker->word,
@@ -40,28 +42,27 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Product::class, function (Faker\Generator $faker) {
+$factory->define(Product::class, function (Faker $faker) {
 
     return [
         'name' => $faker->word,
         'description' => $faker->paragraph(1),
-        'quantity' => $faker->numberBetween(1, 10),
+        'quantity' => $faker->numberBetween(10, 20),
         'status' => $faker->randomElement([Product::AVAILABLE_PRODUCT, Product::UNAVAILABLE_PRODUCT]),
-        'imgge' => $faker->randomElement(['1.jpg', '2.jpg', '3.jpg']),
+        'image' => $faker->randomElement(['dau-truong-sinh-tu.jpg', 'bat-lua.jpg', 'hung-nhai.jpg']),
         'seller_id' => User::all()->random()->id,
-        //User::inRandomOrder()->first()->id
+        //User::inRandomOrder()->first()->id,
     ];
 });
 
-$factory->define(App\Transaction::class, function (Faker\Generator $faker) {
+$factory->define(Transaction::class, function (Faker $faker) {
 
     $seller = Seller::has('products')->get()->random();
-    $buyer = User::all()->except($seller->id)->random();
+    $buyer = Buyer::all()->except($seller->id)->random();
 
     return [
         'quantity' => $faker->numberBetween(1, 3),
-        'seller_id' => $seller->id,
-        'buyer_id' => $buyer->products->random()->id,
-        //User::inRandomOrder()->first()->id
+        'buyer_id' => $buyer->id,
+        'product_id' => $seller->products->random()->id,
     ];
 });
