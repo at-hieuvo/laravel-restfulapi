@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Transaction;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Apicontroller;
 
-class TransactionController extends Controller
+class TransactionController extends Apicontroller
 {
     /**
      * Display a listing of the resource.
