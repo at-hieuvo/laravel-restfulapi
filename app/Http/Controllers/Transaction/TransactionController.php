@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Transaction;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Transaction;
 
 class TransactionController extends ApiController
 {
@@ -24,8 +25,8 @@ class TransactionController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Transaction $transaction)
     {
-        //
+        return $this->showOne($transaction);
     }
 }
