@@ -2,10 +2,10 @@
 
 namespace App\Traits;
 
-use Illuminate\Support\Collecttion;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-trait ApiResopnser
+trait ApiResponser
 {
     private function successResponse($data, $code)
     {
@@ -14,10 +14,10 @@ trait ApiResopnser
 
     protected function errorResponse($message, $code)
     {
-        return response()->json(['message' => $message, 'code' => '$code'], $code);
+        return response()->json(['error' => $message, 'code' => $code], $code);
     }
 
-    protected function showAll(Collecttion $collection, $code = 200)
+    protected function showAll(Collection $collection, $code = 200)
     {
         return $this->successResponse(['data' => $collection], $code);
     }
