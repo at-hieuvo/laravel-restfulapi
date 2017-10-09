@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Buyer;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Apicontroller;
+use App\Http\Controllers\ApiController;
 use App\Buyer;
 
-class BuyerController extends Apicontroller
+class BuyerController extends ApiController
 {
     /**
      * Display a listing of the resource.
