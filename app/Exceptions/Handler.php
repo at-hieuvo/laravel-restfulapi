@@ -82,7 +82,7 @@ class Handler extends ExceptionHandler
         if ($exception instanceof HttpException) {
             return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
         }
-
+      
         if ($exception instanceof QueryException) {
             $errorCode = $exception->errorInfo[1];
 
@@ -90,6 +90,12 @@ class Handler extends ExceptionHandler
                 return $this->errorResponse('Cannot remove this resource permanently. It is related with any other resource', 409);
             }
         }
+      
+       if (config('app.debug')) {
+            return parent::render($request, $exception);
+        }
+
+        return $this->errorResponse('Unexpected exception. Try late.', 500);
 
         return parent::render($request, $exception);
     }
