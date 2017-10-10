@@ -40,6 +40,7 @@ Route::Resource('products', 'Product\ProductController', ['only' => ['index', 's
  * Sellers
  */
 Route::Resource('sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
+Route::Resource('sellers.transactions', 'Seller\SellerTransactionController', ['only' => ['index']]);
 
 /**
  * Transactions
