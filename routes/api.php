@@ -43,7 +43,7 @@ Route::Resource('sellers', 'Seller\SellerController', ['only' => ['index', 'show
 Route::Resource('sellers.transactions', 'Seller\SellerTransactionController', ['only' => ['index']]);
 Route::Resource('sellers.categories', 'Seller\SellerCategoryController', ['only' => ['index']]);
 Route::Resource('sellers.buyers', 'Seller\SellerBuyerController', ['only' => ['index']]);
-Route::Resource('sellers.products', 'Seller\SellerProductController', ['only' => ['index']]);
+Route::Resource('sellers.products', 'Seller\SellerProductController');
 
 /**
  * Transactions
