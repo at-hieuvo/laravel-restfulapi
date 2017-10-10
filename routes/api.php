@@ -35,6 +35,8 @@ Route::Resource('categories.buyers', 'Category\CategoryBuyerController', ['only'
  * Products
  */
 Route::Resource('products', 'Product\ProductController', ['only' => ['index', 'show']]);
+Route::Resource('products.transactions', 'Product\ProductTransactionController', ['only' => ['index']]);
+
 
 /**
  * Sellers
