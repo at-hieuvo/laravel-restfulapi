@@ -15,6 +15,7 @@ class UserController extends ApiController
      */
     public function index()
     {
+        dd('????');
         $users = User::all();
         return $this->showAll($users);
     }
@@ -49,7 +50,6 @@ class UserController extends ApiController
         $data['verified'] = User::UNVERIFIED_USER;
         $data['verification_token'] = User::generateVerificationCode();
         $data['admin'] = User::REGULAR_USER;
-
         $user = User::create($data);
         return $this->showOne($user, 201);
     }
