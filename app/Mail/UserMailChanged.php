@@ -2,10 +2,11 @@
 
 namespace App\Mail;
 
+use App\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class UserMailChanged extends Mailable
 {
@@ -16,9 +17,9 @@ class UserMailChanged extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -28,6 +29,6 @@ class UserMailChanged extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->text('emails.confirm')->subject('Please confirm your new email');
     }
 }
