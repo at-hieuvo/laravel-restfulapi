@@ -5,7 +5,7 @@ namespace App\Transformers;
 use App\Seller;
 use League\Fractal\TransformerAbstract;
 
-class SellerTransfomer extends TransformerAbstract
+class SellerTransformer extends TransformerAbstract
 {
     /**
      * A Fractal transformer.
