@@ -22,8 +22,8 @@ class ProductTransformer extends TransformerAbstract
             'situation' => (string)$product->status,
             'picture' => url("img/{$product->image}"),
             'seller' => (int)$product->seller_id,
-            'creationDate' => $product->created_at,
-            'lastChange' => $product->updated_at,
+            'creationDate' => (string)$product->created_at,
+            'lastChange' => (string)$product->updated_at,
             'deleteDate' => isset($product->delete_at) ? (string) $product->delete_at : null,
         ];
     }
