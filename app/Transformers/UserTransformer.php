@@ -27,7 +27,7 @@ class UserTransformer extends TransformerAbstract
 
     public static function originalAttribute($index)
     {
-        $attribute = [
+        $attributes = [
             'identifier' => 'id',
             'name' => 'name',
             'email' => 'email',
@@ -38,6 +38,6 @@ class UserTransformer extends TransformerAbstract
             'deletedDate' => 'deleted_at',
         ];
 
-        return isset($attribute[$index]) ? $attribute[$index] : null;
+        return isset($attributes[$index]) ? $attributes[$index] : null;
     }
 }
