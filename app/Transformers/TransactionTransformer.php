@@ -23,7 +23,7 @@ class TransactionTransformer extends TransformerAbstract
             'lastChange' => (string)$transaction->updated_at,
             'deleteDate' => isset($transaction->delete_at) ? (string) $transaction->delete_at : null,
 
-            'link' => [
+            'links' => [
                 [
                     'rel' => 'self',
                     'href' => route('transactions.show', $transaction->id),
