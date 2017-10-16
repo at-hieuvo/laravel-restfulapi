@@ -11,7 +11,7 @@ class ProductController extends ApiController
 {
     public function __construct()
     {
-        parent::_construct();
+        parent::__construct();
 
         $this->middleware('transform.input:' . ProductTransformer::class)->only(['store', 'update']);
     }
