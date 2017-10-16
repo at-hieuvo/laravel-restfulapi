@@ -41,9 +41,9 @@ trait ApiResponser
     {
         $transformer = $instance->transformer;
 
-        $instance = $this->transformData($instance, $code);
-
-        return $this->successResponse(['data' => $model], $code);
+        $instance = $this->transformData($instance, $transformer);
+        
+        return $this->successResponse($instance, $code);
     }
 
     protected function showMessage($message, $code = 200)
@@ -105,7 +105,6 @@ trait ApiResponser
     protected function transformData($data, $transformer)
     {
         $transformation = fractal($data, new $transformer);
-
         return $transformation->toArray();
     }
 
@@ -117,7 +116,7 @@ trait ApiResponser
         $queryString = http_build_query($queryParams);
         
         $fullUrl = "{$url}?{$queryString}";
-        return Cache::remember($fullUrl, 30/60, function() use ($data) {
+        return Cache::remember($fullUrl, 30/60, function () use ($data) {
             return $data;
         });
     }
