@@ -26,7 +26,7 @@ class ProductTransformer extends TransformerAbstract
             'lastChange' => (string)$product->updated_at,
             'deleteDate' => isset($product->delete_at) ? (string) $product->delete_at : null,
 
-            'link' => [
+            'links' => [
                 [
                     'rel' => 'self',
                     'href' => route('products.show', $product->id),
