@@ -93,7 +93,7 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof TokenMismatchException) {
-            return redirect()->back()->withInput($reuqest->input());
+            return redirect()->back()->withInput($request->input());
         }
       
         if (config('app.debug')) {
