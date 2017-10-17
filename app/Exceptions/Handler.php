@@ -2,17 +2,18 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponser;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use App\Traits\ApiResponser;
+use Illuminate\Session\TokenMismatchException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -90,8 +91,12 @@ class Handler extends ExceptionHandler
                 return $this->errorResponse('Cannot remove this resource permanently. It is related with any other resource', 409);
             }
         }
+
+        if ($exception instanceof TokenMismatchException) {
+            return redirect()->back()->withInput($reuqest->input());
+        }
       
-       if (config('app.debug')) {
+        if (config('app.debug')) {
             return parent::render($request, $exception);
         }
 
