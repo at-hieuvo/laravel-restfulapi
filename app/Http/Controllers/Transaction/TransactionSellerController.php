@@ -8,6 +8,10 @@ use App\Http\Controllers\ApiController;
 
 class TransactionSellerController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
