@@ -131,19 +131,16 @@ class Handler extends ExceptionHandler
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
     {
         $errors = $e->validator->errors()->getMessages();
-
-        if ($request->isFrontEnd()) {
-            return $request->ajax() ? response()->json($error, 422) : redirect()
-                ->back()
-                ->withInput($request->input())
-                ->withErrors($errors);
+        
+        if ($this->isFrontend($request)) {
+            return $request->ajax() ? response()->json($erros, 422) : redirect()->back()->withInput($request->input())->withErrors($errors);
         }
-
+        
         return $this->errorResponse($errors, 422);
     }
 
     private function isFrontend($request)
     {
-        return $request->acceptsHtml() && collect($request->route()->middleware())->contains('web');
+        return $request->acceptsHTML() && collect($request->route()->middleware())->contains('web');
     }
 }
